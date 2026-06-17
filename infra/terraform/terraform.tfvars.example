@@ -4,6 +4,6 @@ region     = "us-east-1"
 my_ip_cidr = "CHANGE_ME/32" # run: curl ifconfig.me   then add /32
 
 # Optional overrides
-# cp_instance_type     = "t3.medium"
-# worker_instance_type = "t3.small"
-# root_volume_gb       = 20
+# cp_instance_type     = "t3.medium"  # control plane needs 2 GB+; free tier micros are too small
+# worker_instance_type = "t3.small"   # t3.micro is free tier eligible but only 1 GB, tight for workers
+# root_volume_gb       = 20           # set to 10 to fit the 30 GB EBS free tier across 3 nodes

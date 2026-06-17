@@ -1,6 +1,17 @@
 # Runbook
 
-This runbook builds the project step by step. Phase 0 is below. Later phases get added as we go.
+This runbook builds the project step by step. It is organized in phases.
+
+## Before you start
+
+Some files hold private or environment specific values. The repo ships them as .example templates. Copy each one to its real name and fill in your values. The real names are gitignored so they never get committed.
+
+- cluster/kubeadm-config.yaml.example
+- manifests/cluster-issuer-staging.yaml.example
+- manifests/cluster-issuer-prod.yaml.example
+- infra/terraform/terraform.tfvars.example
+
+The copy command is shown at the step where each file is first used.
 
 ## Phase 0. Infrastructure with spin up and spin down
 
@@ -177,7 +188,13 @@ You want the line node-prep complete and all three tools on the path. If the log
 
 ### 1.3 Fill in the cluster config
 
-The file cluster/kubeadm-config.yaml has two placeholders. Replace them with your real values from step 1.1. Edit the file in an editor, or use sed.
+Copy the template to its real name. The real file is gitignored.
+
+```
+cp cluster/kubeadm-config.yaml.example cluster/kubeadm-config.yaml
+```
+
+The file has two placeholders. Replace them with your real values from step 1.1. Edit the file in an editor, or use sed.
 
 ```
 sed -i "s/CONTROL_PLANE_PRIVATE_IP/CP_PRIVATE/" cluster/kubeadm-config.yaml
@@ -396,7 +413,14 @@ Wait until all three cert-manager pods are Running before moving on.
 
 ### 3.5 Create the Let's Encrypt issuers
 
-Set your email in both issuer files first. Then apply them. Issuers are cluster wide, so only the admin can create them.
+Copy the templates to their real names first. The real files are gitignored.
+
+```
+cp manifests/cluster-issuer-staging.yaml.example manifests/cluster-issuer-staging.yaml
+cp manifests/cluster-issuer-prod.yaml.example manifests/cluster-issuer-prod.yaml
+```
+
+Set your email in both files. Then apply them. Issuers are cluster wide, so only the admin can create them.
 
 ```
 sed -i "s/your-email@example.com/YOU@EXAMPLE.COM/" manifests/cluster-issuer-staging.yaml manifests/cluster-issuer-prod.yaml

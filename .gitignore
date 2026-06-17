@@ -22,3 +22,4 @@ docs/exercise-source.txt
 /manifests/cluster-issuer-staging.yaml
 /manifests/cluster-issuer-prod.yaml
 /user-dev/
+/docs/project-plan.md

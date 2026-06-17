@@ -34,6 +34,8 @@ docs              runbook and design notes
 
 Three small nodes cost a few cents per hour while running. Stop them when idle and you pay only for storage and the two Elastic IPs. The helpers in the scripts folder stop and start the nodes. The cluster survives a stop and start because the disks and private IPs persist. Run terraform destroy when the project is finished.
 
+On the AWS free tier the micro instances have 1 GB of memory, which is below what the kubeadm control plane needs. The control plane runs on a small paid instance instead. Keeping each root volume at 10 GB fits the 30 GB EBS free tier. Stopping the nodes when idle keeps the total to a few dollars. The full cost notes are in docs/design.md.
+
 ## Build phases
 
 0. Infrastructure with spin up and spin down. See docs/runbook.md.
