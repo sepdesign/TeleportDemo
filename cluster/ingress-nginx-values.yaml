@@ -1,0 +1,14 @@
+# Helm values for ingress-nginx on bare metal with host networking.
+# The controller binds ports 80 and 443 directly on the node it runs on.
+# We pin it to the node that holds the ingress Elastic IP with a nodeSelector.
+controller:
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+  nodeSelector:
+    ingress: "true"
+  service:
+    type: ClusterIP
+  ingressClassResource:
+    default: true
+  publishService:
+    enabled: false

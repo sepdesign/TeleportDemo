@@ -1,0 +1,9 @@
+# Copy this file to terraform.tfvars and edit the values.
+
+region     = "us-east-1"
+my_ip_cidr = "CHANGE_ME/32" # run: curl ifconfig.me   then add /32
+
+# Optional overrides
+# cp_instance_type     = "t3.medium"
+# worker_instance_type = "t3.small"
+# root_volume_gb       = 20

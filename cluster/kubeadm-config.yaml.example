@@ -1,0 +1,21 @@
+# kubeadm cluster configuration.
+# Fill the two placeholders with values from: terraform output
+# Then copy this file to the control plane node and run:
+#   sudo kubeadm init --config kubeadm-config.yaml
+#
+# kubernetesVersion is left unset on purpose. kubeadm uses the installed
+# kubeadm version, which is the v1.35 line from node-prep.sh.
+
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: "CONTROL_PLANE_PRIVATE_IP" # control_plane_private_ip output
+  bindPort: 6443
+---
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+networking:
+  podSubnet: "192.168.0.0/16" # Calico default. Leave as is.
+apiServer:
+  certSANs:
+    - "CONTROL_PLANE_EIP" # control_plane_public_ip output. Lets kubectl reach the API from your laptop.

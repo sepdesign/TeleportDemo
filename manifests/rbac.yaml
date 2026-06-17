@@ -1,0 +1,47 @@
+# Namespace, Role and RoleBinding for the non admin user.
+# The Role lists only what is needed to deploy and watch the Nginx app.
+# No secrets. No other namespaces. Nothing cluster wide.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: web
+  name: nginx-app-manager
+rules:
+  # Deploy and reach the app
+  - apiGroups: [""]
+    resources: ["services", "configmaps", "pods", "pods/portforward"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  # Watch the app
+  - apiGroups: [""]
+    resources: ["pods/log", "events"]
+    verbs: ["get", "list", "watch"]
+  # The Deployment and the ReplicaSets it owns
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  # Expose the site
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: web
+  name: dev-nginx-app-manager
+subjects:
+  # Bind to the user. The name matches the CN in the client certificate.
+  # To grant a whole team instead, change kind to Group and name to web-team.
+  - kind: User
+    name: dev
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: nginx-app-manager
+  apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,24 @@
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.*
+infra/terraform/terraform.tfvars
+crash.log
+
+# Keys and credentials
+*.pem
+*.key
+kubeconfig
+*.kubeconfig
+admin.conf
+dev.crt
+dev.csr
+
+# Keep the exercise prompt out of the public repo
+docs/exercise-source.txt
+/cluster/kubeadm-config.yaml
+/infra/terraform/teleport-key.pem*
+/docs/notes.txt
+/manifests/cluster-issuer-staging.yaml
+/manifests/cluster-issuer-prod.yaml
+/user-dev/

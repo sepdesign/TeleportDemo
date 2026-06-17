@@ -1,0 +1,27 @@
+# Ingress for the site. The annotation asks cert-manager for a certificate.
+# Start on the staging issuer. Switch the annotation to letsencrypt-prod once
+# staging works, then re-apply.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  namespace: web
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - teleportdemotwo.cathlamettowing.com
+      secretName: nginx-tls
+  rules:
+    - host: teleportdemotwo.cathlamettowing.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx
+                port:
+                  number: 80
