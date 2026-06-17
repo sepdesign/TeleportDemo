@@ -337,7 +337,7 @@ The first works and shows the web namespace. The second is refused with a Forbid
 
 ## Phase 3. cert-manager, ingress and a trusted certificate
 
-Goal. Serve the site at https://teleportdemotwo.cathlamettowing.com with a real certificate. The admin installs the platform. The dev user deploys the app.
+Goal. Serve the site at a custom url (We will be using https://teleportdemotwo.cathlamettowing.com as I own it ) with a real certificate. The admin installs the platform. The dev user deploys the app.
 
 Run these from the repo root. The admin kubeconfig is ./kubeconfig. The dev kubeconfig is ./user-dev/dev.kubeconfig.
 
