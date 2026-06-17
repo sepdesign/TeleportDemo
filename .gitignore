@@ -23,3 +23,5 @@ docs/exercise-source.txt
 /manifests/cluster-issuer-prod.yaml
 /user-dev/
 /docs/project-plan.md
+
+/prod-cluster-values.yaml
