@@ -360,10 +360,11 @@ Get the ingress Elastic IP.
 terraform -chdir=infra/terraform output ingress_public_ip
 ```
 
-In your DNS provider for cathlamettowing.com, create an A record for teleportdemotwo that points at that IP. Set a low TTL like 300 while you work. Confirm it resolves.
+In your DNS provider for your custom url (I will be using cathlamettowing.com as I own it), create an A record for teleportdemotwo that points at that IP. Set a low TTL like 300 while you work. Confirm it resolves.
 
 ```
-nslookup teleportdemotwo.cathlamettowing.com
+nslookup subdomain.url.com
+ex: nslookup teleportdemotwo.cathlamettowing.com
 ```
 
 You want the answer to be the ingress Elastic IP.
